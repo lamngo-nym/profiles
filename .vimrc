@@ -10,7 +10,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-sensible'
@@ -29,7 +28,7 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'elzr/vim-json'
-Plug 'valloric/youcompleteme'
+Plug 'ycm-core/YouCompleteMe'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'zxqfl/tabnine-vim'
@@ -52,9 +51,20 @@ Plug 'plasticboy/vim-markdown'
 Plug 'itspriddle/vim-marked'
 Plug 'reedes/vim-thematic'
 Plug 'reedes/vim-wordy'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'rhysd/vim-grammarous'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/unite.vim'
+Plug 'kana/vim-operator-user'
+Plug 'ron89/thesaurus_query.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 
 call plug#end()
+
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
@@ -130,9 +140,6 @@ let NERDTreeAutoDeleteBuffer = 1
 nmap <F6> :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <silent> <Leader>v :NERDTreeFind<CR>
-
-"Ignore for ctrlp
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|bower_components'
 
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
