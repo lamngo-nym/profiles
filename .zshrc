@@ -1,5 +1,14 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+#
+export TERM='xterm-256color'
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/lamngo/.oh-my-zsh"
@@ -8,7 +17,7 @@ export ZSH="/Users/lamngo/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -68,7 +77,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode svn)
+plugins=(git svn)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,6 +106,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias r="ranger"
 
 # Initialize plugins
 source ~/.zplug/init.zsh
@@ -105,10 +115,37 @@ source ~/.zplug/init.zsh
 # zplug "zsh-users/zsh-autosuggestions"
 zplug 'wfxr/forgit'
 zplug "agkozak/zsh-z"
+zplug "wting/autojump"
 zplug load
+
+# vi mode
+bindkey -v
+export KETYTIMEOUT=1
+
+# Edit line in vim with ctrl-e
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# Use lf to switch directories and bind it to ctrl-o
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}
+bindkey -s '^o' 'lfcd\n'
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+FD_OPTIONS="--follow --exclude .git --exclude node_modules"
+export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l $FD_OPTIONS"
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
 
 export FZF_DEFAULT_OPTS="
 --layout=reverse
@@ -125,6 +162,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'ctrl-e:execute(echo {+} | xargs -o vim)'
 --bind 'ctrl-v:execute(code {+})'
 "
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -145,3 +183,14 @@ prompt_svn() {
 }
 
 export DEFAULT_USER=`whoami`
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# NNN
+export NNN_PLUG='m:nmount;p:preview-tui;j:autojump'
+set --export NNN_FIFO "/tmp/nn.fifo"
+
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
