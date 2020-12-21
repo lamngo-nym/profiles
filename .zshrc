@@ -11,7 +11,7 @@ fi
 export TERM='xterm-256color'
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/lamngo/.oh-my-zsh"
+export ZSH="/home/lamngo/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -77,7 +77,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git svn)
+plugins=(git zsh-z)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,16 +107,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias r="ranger"
-
-# Initialize plugins
-source ~/.zplug/init.zsh
-# zplug "woefe/wbase.zsh"
-# zplug "zsh-users/zsh-completions"
-# zplug "zsh-users/zsh-autosuggestions"
-zplug 'wfxr/forgit'
-zplug "agkozak/zsh-z"
-zplug "wting/autojump"
-zplug load
 
 # vi mode
 bindkey -v
@@ -187,10 +177,9 @@ export DEFAULT_USER=`whoami`
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# NNN
-export NNN_PLUG='m:nmount;p:preview-tui;j:autojump'
-set --export NNN_FIFO "/tmp/nn.fifo"
-
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# Personal settings
+xset r rate 280 40
+setxkbmap -option caps:swapescape

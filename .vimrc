@@ -190,6 +190,6 @@ command! -nargs=0 Prose call Prose()
 command! -bang -nargs=*  All
   \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
 
-nnoremap <silent> <leader>o :All<cr>
+nnoremap <silent> <leader>o :Files<cr>
 nnoremap <silent> <leader>l :Lines<cr>
 nnoremap <silent> <leader>k :Buffers<cr>

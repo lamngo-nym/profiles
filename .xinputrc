@@ -1,0 +1,12 @@
+# im-config(8) generated on Fri, 18 Dec 2020 14:34:42 +0700
+run_im ibus
+# im-config signature: c1de759210398c5493e523e8b2c1aa30  -
+
+feh --bg-fill ~/Downloads/kazetachinu042.jpg
+
+xcompmgr &
+
+sxhkd &
+
+dwmstatus  2>&1 >/dev/null &
+
